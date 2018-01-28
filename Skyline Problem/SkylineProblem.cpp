@@ -9,23 +9,23 @@ struct Building {
     Building(int _index, int _h, int _l, int _r) : index(_index), h(_h), l(_l), r(_r) { }
 };
 
-struct MyPoint {
+struct LeftPoint {
     int x, y, bIndex;
-    MyPoint(int _x, int _y, int _bIndex) : x(_x), y(_y), bIndex(_bIndex) {}
+    LeftPoint(int _x, int _y, int _bIndex) : x(_x), y(_y), bIndex(_bIndex) {}
 };
 
 class Solution {
 public:
     vector<pair<int, int>> getSkyline(vector<vector<int>>& A) {
         vector<Building> buildings;
-        vector<MyPoint> points;
+        vector<LeftPoint> points;
         for (int i = 0; i<A.size(); i++) {
             buildings.push_back(Building(i, A[i][2], A[i][0], A[i][1]));
-            points.push_back(MyPoint(A[i][0], A[i][2], i));
-            points.push_back(MyPoint(A[i][1], 0, i));
+            points.push_back(LeftPoint(A[i][0], A[i][2], i));
+            points.push_back(LeftPoint(A[i][1], 0, i));
         }
 
-        sort(points.begin(), points.end(), [](const MyPoint &a, const MyPoint &b) {
+        sort(points.begin(), points.end(), [](const LeftPoint &a, const LeftPoint &b) {
             if (a.x == b.x) return a.y > b.y;
             return a.x < b.x;
             }
